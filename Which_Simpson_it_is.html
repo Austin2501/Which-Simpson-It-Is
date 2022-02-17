@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Which Simpson It Is</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    function processImage() {
+        // **********************************************
+        // *** Update or verify the following values. ***
+        // **********************************************
+
+        let subscriptionKey = 'a4975964f65248f2a0c41da691a26f00';
+        let endpoint = 'https://custumvisionwebcasts.cognitiveservices.azure.com/';
+        if (!subscriptionKey) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
+        
+        // Display the image.
+        var sourceImageUrl = document.getElementById("inputImage").value;
+        document.querySelector("#sourceImage").src = sourceImageUrl;
+
+        // Make the REST API call.
+        $.ajax({
+            url: "https://custumvisionwebcasts-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/645bc420-5c17-4853-82af-9b478cc0200d/classify/iterations/Iteration2/url" ,
+
+            // Request headers.
+            beforeSend: function(xhrObj){
+                xhrObj.setRequestHeader("Content-Type","application/json");
+                xhrObj.setRequestHeader("Prediction-Key", "c5249ccbf74b450e9d1c3700900cfdd3");
+            },
+
+            type: "POST",
+
+            // Request body.
+            data: '{"url": ' + '"' + sourceImageUrl + '"}',
+        })
+
+        .done(function(data) {
+            // Show formatted JSON on webpage.
+            $("#responseTextArea").val(JSON.stringify(data, null, 2));
+        })
+
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            // Display error message.
+            var errorString = (errorThrown === "") ? "Error. " :
+                errorThrown + " (" + jqXHR.status + "): ";
+            errorString += (jqXHR.responseText === "") ? "" :
+                jQuery.parseJSON(jqXHR.responseText).message;
+            alert(errorString);
+        });
+    };
+</script>
+
+<h1>Analyze image:</h1>
+Enter the URL to an image, then click the <strong>Analyze image</strong> button.
+<br><br>
+Image to analyze:
+<input type="text" name="inputImage" id="inputImage"/>
+<button onclick="processImage()">Analyze image</button>
+<br><br>
+<div id="wrapper" style="width:1020px; display:table;">
+    <div id="jsonOutput" style="width:600px; display:table-cell;">
+        Response:
+        <br><br>
+        <textarea id="responseTextArea" class="UIInput"
+                  style="width:580px; height:400px;"></textarea>
+    </div>
+    <div id="imageDiv" style="width:420px; display:table-cell;">
+        Source image:
+        <br><br>
+        <img id="sourceImage" width="400" />
+    </div>
+</div>
+</body>
+</html>
