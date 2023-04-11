@@ -1,0 +1,62 @@
+body {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  /* identical to box height */
+  text-align: center;
+}
+
+header {
+  display: flex;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  border-radius: 5px;
+  height: 5rem;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+header > img {
+  width: auto;
+  height: auto;
+  padding: 10px;
+}
+header > h1 {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20.7482px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+header .banner {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  line-height: 24px;
+}
+
+.img-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 75%;
+  text-align: center;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  border: 0px;
+  border-radius: 5px;
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 30px;
+  margin: 50px;
+  color: #ffffff;
+}
+
+.output {
+  display: flex;
+  justify-content: space-around;
+}
